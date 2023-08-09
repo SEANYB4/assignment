@@ -3,13 +3,16 @@ from tkinter import filedialog
 import pandas as pd
 import json
 
+
+# FUNCTIONS
+
 def convert_to_json():
     file_path = filedialog.askopenfilename(filetypes=[('CSV Files', '.csv')])
     if file_path:
         try:
-            df = pd.read_csv(file_path)
+            df = pd.read_csv(file_path, encoding='latin-1')
             json_data = df.to_json(orient='records')
-            save_path = filedialog.asksaveasfilename(defaulttextextension='json', filetypes=[("JSON Files", "*.json")])
+            save_path = filedialog.asksaveasfilename(defaultextension='json', filetypes=[("JSON Files", "*.json")])
 
             if save_path:
                 with open(save_path, 'w') as json_file:
@@ -25,6 +28,9 @@ def convert_to_json():
 
     else:
         status_label['text'] = "No file selected."
+
+
+# GUI
 
 # Create the main window
 window = tk.Tk()
